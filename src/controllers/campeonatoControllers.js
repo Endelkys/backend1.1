@@ -1,4 +1,4 @@
-
+const { modalidades, equiposAparticipar, modalidades } = require('../baseDatosFake/almacenarDatos')
 
 class CampeonatoRobotica {
     agregarModalidad() {
