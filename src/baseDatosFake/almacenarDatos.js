@@ -3,7 +3,10 @@
     nombreModalidad: "",
     categorias: [
         {   nombreCategoria: "", 
-            equiposParticipantes: [{ nombreEquipo: '', participantes: [{nombre: '', cedula: ''}] }]
+            equiposParticipantes: [{
+                nombreEquipo: '', 
+                participantes: [{ nombre: '', cedula: '' }] 
+            }]
         }
     ]   
 } 
