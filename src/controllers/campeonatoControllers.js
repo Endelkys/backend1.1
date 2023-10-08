@@ -1,52 +1,52 @@
-const { modalidades, equiposAparticipar, modalidades } = require('../baseDatosFake/almacenarDatos')
+const { modalidades, equiposAparticipar, patrocinantes } = require('../baseDatosFake/almacenarDatos')
 
 class CampeonatoRobotica {
-    agregarModalidad() {
-        
+    agregarModalidad(req, res) {
+        res.json({mensaje: 'Prueba'})
     }
 
-    agregarCategoriaAModalidad() {
-
+    agregarCategoriaAModalidad(req, res) {
+        res.json({mensaje: 'Prueba'})
     }
 
-    registrarEquipo() {
-        
+    registrarEquipo(req, res) {
+        res.json()
     }
 
-    agregarPatrocinantes() {
-
+    agregarPatrocinante(req, res) {
+        res.json()
     }
 
-    editarEquipo() {
-
+    editarEquipo(req, res) {
+        res.json()
     }
 
-    editarCategoria() {
-
+    editarCategoria(req, res) {
+        res.json()
     }
 
-    mostrarPatrocinantes() {
-
+    mostrarPatrocinantes(req, res) {
+        res.json()
     }
 
-    mostrarEquipos() {
-
+    mostrarEquipos(req, res) {
+        res.json({mensaje: 'Mostrando equipos'})
     }
 
-    mostrarEquiposPorCategoria() {
-
+    mostrarEquiposPorCategoria(req, res) {
+        res.json()
     }
 
-    eliminarEquipo() {
-
+    eliminarEquipo(req, res) {
+        res.json()
     }
 
-    eliminarCategoria() {
-
+    eliminarCategoria(req, res) {
+        res.json()
     }
 
-    eliminarEquipoPorCategoria() {
-
+    eliminarEquipoPorCategoria(req, res) {
+        res.json()
     }
 
 }
