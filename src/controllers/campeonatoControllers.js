@@ -3,7 +3,7 @@ const { modalidades, equiposAparticipar, patrocinantes } = require('../baseDatos
 class CampeonatoRobotica {
     agregarModalidad(req, res) { // Este y los 3 siguientes los hace Miguel
         const datos = req.body;
-        const verificarRegistroExistente = modalidades.find( modalidad => modalidad.nombreModalidad === datos.nombreModalidad );
+        const verificarRegistroExistente = modalidades.find( modalidad => modalidad.nombreModalidad.toLocaleLowerCase() === datos.nombreModalidad.toLocaleLowerCase() );
 
         if (verificarRegistroExistente) return res.json({error: true, mensaje: 'Ya existe una modalidad registrada con ese nombre'})
 
@@ -17,7 +17,7 @@ class CampeonatoRobotica {
 
     agregarCategoriaAModalidad(req, res) {
         const { nombreModalidad, nombreCategoria } = req.body;
-        const indiceModalidad = modalidades.findIndex(modalidad => modalidad.nombreModalidad === nombreModalidad);
+        const indiceModalidad = modalidades.findIndex(modalidad => modalidad.nombreModalidad.toLocaleLowerCase() === nombreModalidad.toLocaleLowerCase());
 
         if( indiceModalidad === -1 ) return res.json({error: true, mensaje: 'La modalidad no existe.'})
 

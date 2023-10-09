@@ -8,6 +8,9 @@ const rutasPaginas = require('./routes/vistasRoutes')
 
 app.use(cors()) // Evitar problemas al apuntar las rutas de la API.
 app.use(express.json()); // Transformar la data que llegue a formarto JSON
+app.use(express.urlencoded({extended: false})); // Transformar la data que llegue a formarto JSON
+
+//Rutas
 app.use(rutasPaginas); // Ruta para las paginas.
 app.use('/api', rutasCampeonato); // Ruta.
 
