@@ -30,13 +30,15 @@ class CampeonatoRobotica {
 
     registrarEquipo(req, res) {
         const { nombreModalidad, nombreCategoria, equipo } = req.body;
+        equiposAparticipar.push(equipo) // Añadir el equipo al array de los equipos participantes
 
         const indiceModalidad = modalidades.findIndex(modalidad => modalidad.nombreModalidad === nombreModalidad);
         if( indiceModalidad === -1 ) return res.json({error: true, mensaje: 'La modalidad no existe.'})
 
         const indiceCategoria = modalidades[indiceModalidad].categorias.findIndex(categoria => categoria.nombreCategoria === nombreCategoria);
         if( indiceCategoria === -1 ) return res.json({error: true, mensaje: 'La categoria no existe.'})
-        modalidades[indiceModalidad].categorias[indiceCategoria].equiposParticipantes.push(equipo)
+        // Añadir el equipo a la categoria que decida el usuario.
+        modalidades[indiceModalidad].categorias[indiceCategoria].equiposParticipantes.push(equipo);
 
         res.json({modalidades})
     }
@@ -56,19 +58,32 @@ class CampeonatoRobotica {
     }
 
     editarEquipo(req, res) { // Este y los 3 siguientes los hace Endelkys
-        res.json()
+        const datos = req.body;
+
+        const indiceEquipo = equiposAparticipar.findIndex(equipo => equipo.nombreEquipo.toLocaleLowerCase() === datos.nombreEquipo?.toLocaleLowerCase());
+        
+        if(indiceEquipo === -1) return res.json({error: true, mensaje: 'No se ha encontrado un equipo por ese nombre'})
+        equiposAparticipar[indiceEquipo] = datos.equipo; // Reemplazando o actualizando con los nuevos datos
+
+        res.json(equiposAparticipar);
     }
 
     editarCategoria(req, res) {
-        res.json()
+        const { nombreModalidad, categoriaNuevaData } = req.body;
+        const indiceModalidad = modalidades.findIndex(modalidad => modalidad.nombreModalidad === nombreModalidad);
+
+        if( indiceModalidad === -1 ) return res.json({error: true, mensaje: 'La modalidad no existe.'})
+
+        modalidades[indiceModalidad].categorias = categoriaNuevaData;
+        res.json({nuevaData: categoriaNuevaData});
     }
 
     mostrarPatrocinantes(req, res) {
-        res.json()
+        res.json({patrocinantes}) // mostrando Patrocinantes
     }
 
     mostrarEquipos(req, res) {
-        res.json({mensaje: 'Mostrando equipos'})
+        res.json({equiposAparticipar}) // mostrando Equipos a participar
     }
 
     mostrarEquiposPorCategoria(req, res) { // Este y los 3 siguientes los hace Luis
