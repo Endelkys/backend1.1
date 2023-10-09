@@ -29,7 +29,8 @@ class CampeonatoRobotica {
     }
 
     registrarEquipo(req, res) {
-        const { nombreModalidad, nombreCategoria, equipo } = req.body;
+        const { nombreModalidad, nombreCategoria, nombreEquipo, participantes } = req.body;
+        const equipo = {nombreEquipo, participantes}
         equiposAparticipar.push(equipo) // Añadir el equipo al array de los equipos participantes
 
         const indiceModalidad = modalidades.findIndex(modalidad => modalidad.nombreModalidad === nombreModalidad);
