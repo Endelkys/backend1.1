@@ -87,19 +87,49 @@ class CampeonatoRobotica {
     }
 
     mostrarEquiposPorCategoria(req, res) { // Este y los 3 siguientes los hace Luis
-        res.json()
+        res.json(modalidades) // Mostrar equipos a participar
     }
-
+    
     eliminarEquipo(req, res) {
-        res.json()
+        const {nombreEquipo} = req.body;
+    
+        const indiceEquipoABorrar = equiposAparticipar.findIndex(equipo => equipo.nombreEquipo.toLocaleLowerCase() === nombreEquipo.toLocaleLowerCase());
+        if (indiceEquipoABorrar === -1) return res.json({error: true, mensaje: 'No se ha encontrado ningun equipo por ese nombre.'})
+    
+        equiposAparticipar.splice(indiceEquipoABorrar,1);
+        res.json({mensaje: 'El equipo ha sido retirado', equiposAparticipar})
     }
-
+    
     eliminarCategoria(req, res) {
-        res.json()
+        const { nombreModalidad, nombreCategoria } = req.body;
+    
+        const indiceModalidad = modalidades.findIndex(modalidad => modalidad.nombreModalidad === nombreModalidad);
+        if( indiceModalidad === -1 ) return res.json({error: true, mensaje: 'La modalidad no existe.'})
+    
+        const indiceCategoria = modalidades[indiceModalidad].categorias.findIndex(categoria => categoria.nombreCategoria === nombreCategoria);
+        if( indiceCategoria === -1 ) return res.json({error: true, mensaje: 'La categoria no existe.'})
+    
+        modalidades[indiceModalidad].categorias.splice(indiceCategoria,1); // Eliminando categoria
+    
+    
+        res.json({mensaje: 'Categoria eliminada', datos: modalidades[indiceModalidad]});
     }
-
+    
     eliminarEquipoPorCategoria(req, res) {
-        res.json()
+        const { nombreModalidad, nombreCategoria, nombreEquipo } = req.body;
+    
+        const indiceModalidad = modalidades.findIndex(modalidad => modalidad.nombreModalidad === nombreModalidad);
+        if( indiceModalidad === -1 ) return res.json({error: true, mensaje: 'La modalidad no existe.'})
+    
+        const indiceCategoria = modalidades[indiceModalidad].categorias.findIndex(categoria => categoria.nombreCategoria === nombreCategoria);
+        if( indiceCategoria === -1 ) return res.json({error: true, mensaje: 'La categoria no existe.'})
+    
+        const indiceEquipoAEliminar = modalidades[indiceModalidad].categorias[indiceCategoria].equiposParticipantes.findIndex(equipo => equipo.nombreEquipo === nombreEquipo);
+        if( indiceEquipoAEliminar === -1 ) return res.json({error: true, mensaje: 'El nombre del equipo no existe.'})
+    
+    
+        modalidades[indiceModalidad].categorias[indiceCategoria].equiposParticipantes.splice(indiceEquipoAEliminar,1);
+        res.json({mensaje: 'El equipo ha sido removido con exito', datos: modalidades[indiceModalidad]});
     }
 
 }

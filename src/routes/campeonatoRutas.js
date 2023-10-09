@@ -19,9 +19,9 @@ router.get('/obtener-patrocinantes', campeonatoControllers.mostrarPatrocinantes)
 router.get('/obtener-equipos-por-categoria', campeonatoControllers.mostrarEquiposPorCategoria);
 
 //Rutas con el metodo DELETE -- Para eliminar registros.
-router.delete('/eliminar-equipo/:id', campeonatoControllers.eliminarEquipo)
-router.delete('/eliminar-categoria/:id', campeonatoControllers.eliminarCategoria)
-router.delete('/eliminar-equipo-por-categoria/:id', campeonatoControllers.eliminarEquipoPorCategoria)
+router.delete('/eliminar-equipo', campeonatoControllers.eliminarEquipo)
+router.delete('/eliminar-categoria', campeonatoControllers.eliminarCategoria)
+router.delete('/eliminar-equipo-por-categoria', campeonatoControllers.eliminarEquipoPorCategoria)
 
 
 module.exports = router;
